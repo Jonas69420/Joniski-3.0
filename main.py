@@ -1,13 +1,25 @@
-from website import create_app
+from flask import Flask, render_template
+
 
 def start():
-    app = create_app()
+  app = Flask("app")
 
-    if app == None:
-        return
+  if app == None: return
 
-    app.run(debug=True, host="0.0.0.0", port=8080)
+  @app.route("/")
+  def main():
+    return render_template("main.html")
+
+  @app.route("/downloads")
+  def downloads():
+    return render_template("downloads.html")
+
+  @app.route("/about")
+  def about():
+    return render_template("about.html")
+
+  app.run(host="0.0.0.0", port=5000)
 
 
 if __name__ == "__main__":
-    start()
+  start()
